@@ -1,0 +1,2 @@
+# Ejercicio-sequelize
+Ejercicio-sequelize
