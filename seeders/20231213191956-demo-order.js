@@ -15,14 +15,14 @@ module.exports = {
    return queryInterface.bulkInsert('Orders', [
     {
       orderDate: new Date(),
-      totalAmount: '',
+      totalAmount: '500',
       userId: '',
       createdAt: new Date(),
       upDatedAt: new Date()
     },
     {
       orderDate: new Date(),
-      totalAmount: '',
+      totalAmount: '153',
       userId: '',
       createdAt: new Date(),
       upDatedAt: new Date()
@@ -37,5 +37,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    await queryInterface.bulkDelete('Orders', null, {});
   }
 };

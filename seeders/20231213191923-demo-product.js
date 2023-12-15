@@ -13,7 +13,7 @@ module.exports = {
      * }], {});
     */
 
-    return queryInterface.bulkInsert('products', [
+    return queryInterface.bulkInsert('Products', [
       {
         name: 'Steam',
         price: 200,
@@ -53,11 +53,7 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    await queryInterface.bulkDelete('Products', null, {});
+
   }
 };
