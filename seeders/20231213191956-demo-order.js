@@ -12,6 +12,22 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+   return queryInterface.bulkInsert('Orders', [
+    {
+      orderDate: new Date(),
+      totalAmount: '',
+      userId: '',
+      createdAt: new Date(),
+      upDatedAt: new Date()
+    },
+    {
+      orderDate: new Date(),
+      totalAmount: '',
+      userId: '',
+      createdAt: new Date(),
+      upDatedAt: new Date()
+    }
+   ])
   },
 
   async down (queryInterface, Sequelize) {

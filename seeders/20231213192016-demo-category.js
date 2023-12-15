@@ -12,6 +12,21 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+   return queryInterface.bulkInsert('Catergory', [
+    {
+      name: 'Hardware',
+      description: 'Computers, PCs, Mac and video-consoles',
+      createdAt: new Date(),
+      upDatedAt: new Date()
+    },
+    {
+      name: 'Electronics',
+      description: 'TVs, Microwaves, Sound Systems and much more!',
+      createdAt: new Date(),
+      upDatedAt: new Date()
+    },
+
+   ])
   },
 
   async down (queryInterface, Sequelize) {
