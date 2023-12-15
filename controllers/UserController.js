@@ -1,4 +1,4 @@
-const { User } = require('../models/index.js')
+const { User, Post, Token } = require('../models/index.js')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { jwt_secret } = require('../config/config.json')['development']
@@ -46,8 +46,8 @@ const UserController = {
             return res.status(400).send({message:"Usuario o contraseña incorrectos"})
         }
         let token = jwt.sign({ id: user.id }, jwt_secret);
-   Token.create({ token, UserId: user.id });
-        res.send({ message: 'Bienvenid@' + user.name, user, token })
+          Token.create({ token, UserId: user.id });
+          res.send({ message: 'Bienvenid@' + user.name, user, token })
     })
   },
   async deleteUSer(req, res) {
@@ -64,6 +64,22 @@ const UserController = {
       send.status(500).send('Error al eliminar el usuario')
     }
   },
+  async logout(req, res) {
+    try {
+      await Token.destroy({
+        where: {
+          [Op.and]: [
+            { UserId: req.user.id }, 
+            { token: req.headers.authorization }
+          ]
+        }
+      })
+      res.send({ message: 'Desconectado con éxito'})
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ message: 'Hubo un problema al tratar de desconectarte' })
+    }
+  }
 }
 
 

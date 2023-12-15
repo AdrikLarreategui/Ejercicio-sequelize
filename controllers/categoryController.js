@@ -13,6 +13,43 @@ const CategoryController = {
             console.error(error)
             res.status(500).send('Error al crear la categoría')
         })
+    },
+    async getAllWithProducs (req, res) {
+        try {
+            const categoriesWithProducts = await Category.findAll({
+                include: [{
+                    model: Product,
+                    attributes: ['productName'],
+                }]
+            })
+            res.status(200).json(categoriesWithProducts)
+        } catch (error) {
+            console.error(error)
+            res.status(500).send('Error al obtener productos con categorías')
+        }
+    },
+    findById(req, res) {
+        Category.findByPK(req.params.id)
+        .then(category => res.status(200).json(category))
+        .catch(error => {
+            console.error(error)
+            res.status(500).send('Error al obtener relaciones')
+        })
+    },
+    findByName(req, res) {
+        const categoryName = req.params.categoryName
+        Category.findAll({
+            where: {
+                categoryName: {
+                    [Op.like]: `%${categoryName}%`
+                }
+            }
+        })
+        .then(category => res.status(200).json(category))
+        .catch(error => {
+            console.error(error)
+            res.status(500).send('Error al obtener productos por nombre')
+        })
     }
 }
 
